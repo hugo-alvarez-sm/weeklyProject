@@ -52,14 +52,9 @@ body {
     background-color: #444; /* Un tono más oscuro al pasar el ratón */
   }
   
-  .google-button {
-    background-color: #db4437; /* Color de botón de Google */
+  .google-login-button {
+    margin-top: 10px; /* Ajusta el margen superior para separar el botón de Google */
   }
-  
-  .google-button:hover {
-    background-color: #c1351d; /* Un tono más oscuro al pasar el ratón */
-  }
-  
   .sign-up-link {
     color: #0070c9; /* Color azul para el enlace de Sign Up */
     text-decoration: none;
