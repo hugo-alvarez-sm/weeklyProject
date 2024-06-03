@@ -58,13 +58,12 @@ class SignIn extends React.Component {
           <button type="submit" className="button">Sign in</button>
           {/* Botón de Google */}
           <GoogleLogin
-            clientId="1016611963099-m1u6henjgeml93h5912fpfvu6a073leg.apps.googleusercontent.com" // Reemplaza "YOUR_CLIENT_ID" con tu ID de cliente de Google
-            buttonText="Sign in with Google"
-            onSuccess={this.onSuccess} // Método para manejar el inicio de sesión exitoso
-            onFailure={this.onFailure} // Método para manejar el inicio de sesión fallido
-            cookiePolicy={'single_host_origin'}
-            className="google-login-button"
-            auto_select="false"
+            onSuccess={credentialResponse => {
+              console.log(credentialResponse);
+            }}
+            onError={() => {
+              console.log('Login Failed');
+            }}
           />
         </form>
         {/* Texto y enlace para registrarse */}
