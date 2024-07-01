@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { GoogleLogin } from "@react-oauth/google";
+import jwt from "jsonwebtoken";
 
-import "./SignIn.scss"; // Importa el archivo CSS para los estilos
+import "./SignIn.scss";
 
 const SignIn = () => {
   const [username, setUsername] = useState("");
@@ -17,16 +18,31 @@ const SignIn = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Aquí puedes agregar lógica para manejar la autenticación
   };
 
-  const onSuccess = () => {
-    // Muestra una notificación de éxito
-    alert("Login correcto");
+  const getEmailFromJwt = (token) => {
+    try {
+      const decodedToken = jwt.decode(token);
+      if (decodedToken && decodedToken.email) {
+        return decodedToken.email;
+      } else {
+        throw new Error("Email not found in token");
+      }
+    } catch (error) {
+      console.error("Error decoding JWT:", error);
+      return null;
+    }
+  };
+
+  const onSuccess = (credentialResponse) => {
+    const token = credentialResponse.credential;
+    const email = getEmailFromJwt(token);
+    console.log("User email:", email);
+    alert(`Login correcto: ${email}`);
   };
 
   const onFailure = () => {
-    // Muestra una notificación de error
+    console.log("Login Failed");
     alert("Login fallido");
   };
 
@@ -55,18 +71,12 @@ const SignIn = () => {
         </button>
       </form>
       <div className="separator">OR</div>
-      {/* Botón de Google */}
       <GoogleLogin
         className="google-button"
         text="Sign in with Google"
-        onSuccess={(credentialResponse) => {
-          console.log(credentialResponse);
-        }}
-        onError={() => {
-          console.log("Login Failed");
-        }}
+        onSuccess={onSuccess}
+        onError={onFailure}
       />
-      {/* Texto y enlace para registrarse */}
       <div className="SignUp-text">
         Don't have an account?{" "}
         <a href="/SignUp" className="sign-up-link">

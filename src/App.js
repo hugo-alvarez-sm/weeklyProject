@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
@@ -7,7 +8,7 @@ import SignUp from "./components/LogIn/SignUp/SignUp";
 class App extends React.Component {
   render() {
     return (
-      <GoogleOAuthProvider client_id="1016611963099-m1u6henjgeml93h5912fpfvu6a073leg.apps.googleusercontent.com">
+      <GoogleOAuthProvider clientId="1016611963099-m1u6henjgeml93h5912fpfvu6a073leg.apps.googleusercontent.com">
         <Router>
           <Routes>
             <Route path="/" element={<SignIn />} />
