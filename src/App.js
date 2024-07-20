@@ -4,6 +4,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import SignIn from "./components/LogIn/SignIn/SignIn"; // Asegúrate de que la ruta del archivo sea correcta
 import SignUp from "./components/LogIn/SignUp/SignUp";
+import Feed from "./components/Feed/Feed";
+
+import "./App.css";
 
 class App extends React.Component {
   render() {
@@ -13,6 +16,8 @@ class App extends React.Component {
           <Routes>
             <Route path="/" element={<SignIn />} />
             <Route path="/SignUp" element={<SignUp />} />
+            <Route path="Feed" element={<Feed />} />
+            <Route path="*" element={<h1>Not Found</h1>} />
           </Routes>
         </Router>
       </GoogleOAuthProvider>

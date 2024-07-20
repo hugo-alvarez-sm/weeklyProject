@@ -71,79 +71,86 @@ const SignUp = () => {
   };
 
   return (
-    <div className="card-container">
-      <h1>Datos de usuario</h1>
-      {getProgress()}
-      {step === 1 && (
-        <form onSubmit={handleSubmitFirstStep}>
-          <div className="input-group">
-            <input type="text" name="firstName" placeholder="Nombre" required />
-          </div>
-          <div className="input-group">
-            <input
-              type="text"
-              name="lastName"
-              placeholder="Apellidos"
-              required
-            />
-          </div>
-          <div className="input-group select">
-            <select name="gender" className="select">
-              <option value="Hombre">Hombre</option>
-              <option value="Mujer">Mujer</option>
-              <option value="Otro">Otro</option>
-            </select>
-          </div>
-          <div className="input-group">
-            <input
-              type="date"
-              name="dateOfBirth"
-              placeholder="Fecha de nacimiento"
-              required
-            />
-          </div>
-          <button type="submit" className="button">
-            Continuar
-          </button>
-        </form>
-      )}
-      {step === 2 && (
-        <form onSubmit={handleSubmitSecondStep}>
-          <div className="input-group">
-            <input
-              type="email"
-              name="email"
-              placeholder="Correo electrónico"
-              required
-            />
-          </div>
-          <div className="input-group">
-            <input
-              type="password"
-              name="password"
-              placeholder="Contraseña"
-              required
-            />
-          </div>
-          <div className="input-group">
-            <input
-              type="password"
-              name="confirmPassword"
-              placeholder="Confirmar Contraseña"
-              required
-            />
-          </div>
-          <button type="submit" className="button">
-            Registrarse
-          </button>
-        </form>
-      )}
-      {/* Texto y enlace para registrarse */}
-      <div className="LogIn-text">
-        Already have an account?{" "}
-        <a href="/" className="sign-up-link">
-          Log In
-        </a>
+    <div className="card-holder">
+      <div className="card-container">
+        <h1>Datos de usuario</h1>
+        {getProgress()}
+        {step === 1 && (
+          <form onSubmit={handleSubmitFirstStep}>
+            <div className="input-group">
+              <input
+                type="text"
+                name="firstName"
+                placeholder="Nombre"
+                required
+              />
+            </div>
+            <div className="input-group">
+              <input
+                type="text"
+                name="lastName"
+                placeholder="Apellidos"
+                required
+              />
+            </div>
+            <div className="input-group select">
+              <select name="gender" className="select">
+                <option value="Hombre">Hombre</option>
+                <option value="Mujer">Mujer</option>
+                <option value="Otro">Otro</option>
+              </select>
+            </div>
+            <div className="input-group">
+              <input
+                type="date"
+                name="dateOfBirth"
+                placeholder="Fecha de nacimiento"
+                required
+              />
+            </div>
+            <button type="submit" className="button">
+              Continuar
+            </button>
+          </form>
+        )}
+        {step === 2 && (
+          <form onSubmit={handleSubmitSecondStep}>
+            <div className="input-group">
+              <input
+                type="email"
+                name="email"
+                placeholder="Correo electrónico"
+                required
+              />
+            </div>
+            <div className="input-group">
+              <input
+                type="password"
+                name="password"
+                placeholder="Contraseña"
+                required
+              />
+            </div>
+            <div className="input-group">
+              <input
+                type="password"
+                name="confirmPassword"
+                placeholder="Confirmar Contraseña"
+                required
+              />
+            </div>
+            <button type="submit" className="button">
+              Registrarse
+            </button>
+          </form>
+        )}
+        {/* Texto y enlace para registrarse */}
+        <div className="LogIn-text">
+          Already have an account?{" "}
+          <a href="/" className="sign-up-link">
+            Log In
+          </a>
+        </div>
       </div>
     </div>
   );

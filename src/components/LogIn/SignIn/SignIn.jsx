@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { GoogleLogin } from "@react-oauth/google";
-import jwt from "jsonwebtoken";
+import { jwtDecode } from "jwt-decode";
 
 import "./SignIn.scss";
 
@@ -22,7 +22,7 @@ const SignIn = () => {
 
   const getEmailFromJwt = (token) => {
     try {
-      const decodedToken = jwt.decode(token);
+      const decodedToken = jwtDecode(token);
       if (decodedToken && decodedToken.email) {
         return decodedToken.email;
       } else {
@@ -47,41 +47,43 @@ const SignIn = () => {
   };
 
   return (
-    <div className="card-container">
-      <h1>Sign In</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="input-group">
-          <input
-            type="text"
-            value={username}
-            onChange={handleUsernameChange}
-            placeholder="Username"
-          />
+    <div className="card-holder">
+      <div className="card-container">
+        <h1>Sign In</h1>
+        <form onSubmit={handleSubmit}>
+          <div className="input-group">
+            <input
+              type="text"
+              value={username}
+              onChange={handleUsernameChange}
+              placeholder="Username"
+            />
+          </div>
+          <div className="input-group">
+            <input
+              type="password"
+              value={password}
+              onChange={handlePasswordChange}
+              placeholder="Password"
+            />
+          </div>
+          <button type="submit" className="button">
+            Sign in
+          </button>
+        </form>
+        <div className="separator">OR</div>
+        <GoogleLogin
+          className="google-button"
+          text="Sign in with Google"
+          onSuccess={onSuccess}
+          onError={onFailure}
+        />
+        <div className="SignUp-text">
+          Don't have an account?{" "}
+          <a href="/SignUp" className="sign-up-link">
+            Sign Up
+          </a>
         </div>
-        <div className="input-group">
-          <input
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-            placeholder="Password"
-          />
-        </div>
-        <button type="submit" className="button">
-          Sign in
-        </button>
-      </form>
-      <div className="separator">OR</div>
-      <GoogleLogin
-        className="google-button"
-        text="Sign in with Google"
-        onSuccess={onSuccess}
-        onError={onFailure}
-      />
-      <div className="SignUp-text">
-        Don't have an account?{" "}
-        <a href="/SignUp" className="sign-up-link">
-          Sign Up
-        </a>
       </div>
     </div>
   );
