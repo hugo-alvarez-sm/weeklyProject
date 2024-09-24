@@ -1,0 +1,109 @@
+.card-holder {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.particles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Mantiene las partículas detrás */
+}
+
+.card-container {
+  background-color: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  margin: 80px 20px; /* Espacio a los lados */
+  z-index: 1; /* Asegúrate de que esté delante */
+  position: relative; /* Necesario para el z-index */
+}
+
+.logo {
+  width: 180px; /* Ajustado al 50% del tamaño original */
+  height: 180px; /* Ajustado al 50% del tamaño original */
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #d1d1d6;
+  border-radius: 8px;
+  background-color: white; /* Cambiado a blanco */
+  font-size: 16px;
+}
+
+.input-group input::placeholder {
+  font-family: 'Arial', sans-serif;
+  color: white; /* Mantén el color oscuro para buen contraste */
+}
+
+.button {
+  width: 100%;
+  padding: 14px;
+  background-color: #0070c9; /* Azul original */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover {
+  background-color: #086681; /* Azul turquesa */
+}
+
+.google-button-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0; /* Espaciado superior e inferior */
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+  color: #a1a1a1;
+}
+
+.separator:before,
+.separator:after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+.separator:before {
+  margin-right: 10px;
+}
+
+.separator:after {
+  margin-left: 10px;
+}
+
+.SignUp-text {
+  margin-top: 20px;
+  color: #6e6e73;
+}
+
+.sign-up-link {
+  color: #0070c9;
+  text-decoration: none;
+}
+
+.sign-up-link:hover {
+  text-decoration: underline;
+}

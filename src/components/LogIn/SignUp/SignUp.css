@@ -1,0 +1,203 @@
+/* SignIn.css */
+.card-holder {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-container {
+  text-align: center;
+  min-height: 60vh;
+}
+.logo {
+  width: 180px; /* Ajustado al 50% del tamaño original */
+  height: 180px; /* Ajustado al 50% del tamaño original */
+}
+
+.card-container h1 {
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group input {
+  padding: 10px;
+  margin: 0;
+  border-radius: 5px;
+  border: none;
+  background-color: #333;
+  color: #ffffff;
+  width: 100%;
+  box-sizing: border-box;
+  color-scheme: dark;
+}
+
+.input-group input::placeholder {
+  color: #aaa;
+}
+
+.input-group.select {
+  position: relative;
+}
+
+.input-group.select select {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #333;
+  color: #ffffff;
+  width: 100%;
+  box-sizing: border-box;
+  appearance: none;
+}
+
+.input-group.select::after {
+  content: '▼';
+  font-size: .7rem;
+  color: white;
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translate(0, -50%);
+  pointer-events: none;
+}
+
+.input-group.select:hover:focus-within::after {
+  content: '▲';
+}
+
+.input-group select option {
+  background-color: #333;
+  color: #ffffff;
+}
+
+.input-group select:hover {
+  background-color: #444;
+}
+
+.input-group select:focus {
+  outline: none;
+  box-shadow: 0 0 5px #0070c9;
+}
+
+.button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #555;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #444;
+}
+
+.sign-up-link {
+  color: #0070c9;
+  text-decoration: none;
+}
+
+.sign-up-link:hover {
+  text-decoration: underline;
+}
+
+.LogIn-text {
+  color: #333;
+}
+
+/* SignUp.css */
+.progress-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.progress-step {
+  width: 30px;
+  height: 30px;
+  background-color: #ccc;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.step-number {
+  font-size: 16px;
+  color: #fff;
+}
+
+.progress-step.active {
+  background-color: #7da8c9;
+}
+
+.progress-line {
+  width: 100px;
+  height: 3px;
+  background-color: #ccc;
+}
+
+.progress-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.progress-line {
+  width: 75px;
+  height: 0;
+  border: .1rem solid #ccc;
+  border-radius: 99rem;
+}
+
+.progress-blob {
+  position: relative;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 99rem;
+  border: .2rem solid #ccc;
+  transition: border-color 2s;
+}
+
+.progress-blob::after {
+  content: '';
+  position: absolute;
+  background-color: #ccc;
+  transition: background-color 2s;
+  z-index: -1;
+}
+
+.progress-blob.active {
+  border-color: #7da8c9;
+}
+
+.progress-blob.active::after {
+  background-color: #7da8c9;
+}
+
+.progress-blob.full::after {
+  width: 110%;
+  height: 110%;
+  border-radius: 99rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.progress-blob.half::after {
+  width: 110%;
+  height: 40%;
+  border-radius: 0 0 150px 150px;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 15%);
+}
