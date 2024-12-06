@@ -1,3 +1,4 @@
+
 .card-holder {
   height: 100vh;
   display: flex;
@@ -18,45 +19,45 @@
 
 .card-container {
   background-color: white;
-  padding: 40px;
+  padding: 20px; /* Reducido de 40px a 20px */
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
   width: 100%;
-  max-width: 400px;
-  margin: 80px 20px; /* Espacio a los lados */
+  max-width: 350px; /* Reducido de 400px a 350px */
+  margin: 40px 20px; /* Reducido de 80px a 40px arriba y abajo */
   z-index: 1; /* Asegúrate de que esté delante */
   position: relative; /* Necesario para el z-index */
 }
 
 .logo {
-  width: 180px; /* Ajustado al 50% del tamaño original */
-  height: 180px; /* Ajustado al 50% del tamaño original */
+  width: 150px; /* Reducido de 180px a 150px */
+  height: 150px; /* Reducido de 180px a 150px */
 }
 
 .input-group input {
   width: 100%;
-  padding: 12px;
-  margin-bottom: 20px;
+  padding: 10px; /* Reducido de 12px a 10px */
+  margin-bottom: 15px; /* Reducido de 20px a 15px */
   border: 1px solid #d1d1d6;
   border-radius: 8px;
   background-color: white; /* Cambiado a blanco */
-  font-size: 16px;
+  font-size: 14px; /* Reducido de 16px a 14px */
 }
 
 .input-group input::placeholder {
   font-family: 'Arial', sans-serif;
-  color: white; /* Mantén el color oscuro para buen contraste */
+  color: #999; /* Cambiado a un gris más claro para mejor contraste */
 }
 
 .button {
   width: 100%;
-  padding: 14px;
+  padding: 12px; /* Reducido de 14px a 12px */
   background-color: #0070c9; /* Azul original */
   color: white;
   border: none;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 14px; /* Reducido de 16px a 14px */
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
@@ -68,14 +69,40 @@
 .google-button-container {
   display: flex;
   justify-content: center;
-  margin: 20px 0; /* Espaciado superior e inferior */
+  margin-top: 10px;
+}
+
+.google-button {
+  background-color: white; /* Color de fondo blanco */
+  color: #4285F4; /* Color del texto (azul de Google) */
+  border: 1px solid #ddd; /* Borde gris claro */
+  border-radius: 4px; /* Bordes redondeados */
+  padding: 8px 16px; /* Reducido de 10px 20px a 8px 16px */
+  font-size: 14px; /* Reducido de 16px a 14px */
+  cursor: pointer; /* Cambiar el cursor al pasar el mouse */
+  display: flex;
+  align-items: center; /* Alinear el logo verticalmente */
+  transition: background-color 0.3s, border-color 0.3s; /* Transición suave */
+}
+
+.google-button:hover {
+  background-color: #f8f8f8; /* Color de fondo al pasar el mouse */
+  border-color: #c6c6c6; /* Cambia el color del borde al pasar el mouse */
+}
+
+.google-logo {
+  background-image: url("https://www.vectorlogo.zone/logos/google/google-icon.svg");
+  background-size: contain; /* Ajustar el tamaño del logo */
+  width: 20px; /* Ancho del logo */
+  height: 20px; /* Altura del logo */
+  margin-right: 8px; /* Reducido de 10px a 8px */
 }
 
 .separator {
   display: flex;
   align-items: center;
   text-align: center;
-  margin: 20px 0;
+  margin: 15px 0; /* Reducido de 20px a 15px */
   color: #a1a1a1;
 }
 
@@ -87,15 +114,15 @@
 }
 
 .separator:before {
-  margin-right: 10px;
+  margin-right: 8px; /* Reducido de 10px a 8px */
 }
 
 .separator:after {
-  margin-left: 10px;
+  margin-left: 8px; /* Reducido de 10px a 8px */
 }
 
 .SignUp-text {
-  margin-top: 20px;
+  margin-top: 15px; /* Reducido de 20px a 15px */
   color: #6e6e73;
 }
 

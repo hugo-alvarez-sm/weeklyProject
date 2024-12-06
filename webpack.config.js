@@ -26,17 +26,33 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: ['style-loader', 'css-loader', 'sass-loader']
+      },
+      {
+        // Manejo de los warnings de los source maps
+        test: /\.js$/,
+        enforce: 'pre',
+        use: ['source-map-loader'],
+        exclude: [
+          /node_modules\/gaxios/,
+          /node_modules\/googleapis-common/,
+          /node_modules\/gcp-metadata/,
+        ],
       }
     ]
   },
   resolve: {
     extensions: ['.js', '.jsx'],
     fallback: {
-      util: require.resolve("util/"),
-      crypto: require.resolve("crypto-browserify"),
-      stream: require.resolve("stream-browserify"),
-      vm: require.resolve("vm-browserify")
+      util: require.resolve('util/'),
+      crypto: require.resolve('crypto-browserify'),
+      stream: require.resolve('stream-browserify'),
+      vm: require.resolve('vm-browserify'),
+      https: require.resolve('https-browserify'),
+      http: require.resolve('stream-http'),
+      assert: require.resolve('assert'),
+      fs: false, // Desactiva fs ya que no se usa en el navegador
+      path: false
     }
   },
-  // Otras configuraciones de webpack según sea necesario
+  devtool: 'source-map', // Para ayudar en la depuración
 };

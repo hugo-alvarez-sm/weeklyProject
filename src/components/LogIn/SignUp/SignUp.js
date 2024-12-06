@@ -72,21 +72,25 @@ const SignUp = () => {
   };
 
   const getProgress = () => {
-    const progressBlobs = [...Array(maxSteps + 1).keys()]
-     .slice(1)
-      .map((i) =>
-        React.createElement(
-          React.Fragment,
-          { key: i },
-          React.createElement("div", {
-            className: `progress-blob ${i > step ? "empty" : ""} ${
-              i === step ? "half active" : ""
-            } ${i < step ? "full" : ""}`,
-          }),
-          i < maxSteps && React.createElement("div", { className: "progress-line" })
-        )
-      );
-    return React.createElement("div", { className: "progress-container" }, progressBlobs);
+    const progressBlobs = [...Array(maxSteps + 1).keys()].slice(1).map((i) =>
+      React.createElement(
+        React.Fragment,
+        { key: i },
+        React.createElement("div", {
+          className: `progress-blob ${i > step ? "empty" : ""} ${
+            i === step ? "half active" : ""
+          } ${i < step ? "full" : ""}`,
+        }),
+        i < maxSteps &&
+          React.createElement("div", { className: "progress-line" }),
+      ),
+    );
+
+    return React.createElement(
+      "div",
+      { className: "progress-container" },
+      progressBlobs,
+    );
   };
 
   return (
@@ -97,9 +101,12 @@ const SignUp = () => {
           {userCreated ? (
             // Mostrar mensaje de éxito, logo e botón de "Continuar"
             <div className="success-message">
-              <img src="/searchlogonobg.png" alt="Logo" className="logo" /> {/* Imagen del logo */}
+              <img src="/searchlogonobg.png" alt="Logo" className="logo" />{" "}
+              {/* Imagen del logo */}
               <h1>¡Usuario creado exitosamente!</h1>
-              <button onClick={handleContinue} className="button">Continuar</button>
+              <button onClick={handleContinue} className="button">
+                Continuar
+              </button>
             </div>
           ) : (
             <>
@@ -108,10 +115,20 @@ const SignUp = () => {
               {step === 1 && (
                 <form onSubmit={handleSubmitFirstStep}>
                   <div className="input-group">
-                    <input type="text" name="firstName" placeholder="Nombre" required />
+                    <input
+                      type="text"
+                      name="firstName"
+                      placeholder="Nombre"
+                      required
+                    />
                   </div>
                   <div className="input-group">
-                    <input type="text" name="lastName" placeholder="Apellidos" required />
+                    <input
+                      type="text"
+                      name="lastName"
+                      placeholder="Apellidos"
+                      required
+                    />
                   </div>
                   <div className="input-group select">
                     <select name="gender" className="select">
@@ -121,23 +138,47 @@ const SignUp = () => {
                     </select>
                   </div>
                   <div className="input-group">
-                    <input type="date" name="dateOfBirth" placeholder="Fecha de nacimiento" required />
+                    <input
+                      type="date"
+                      name="dateOfBirth"
+                      placeholder="Fecha de nacimiento"
+                      required
+                    />
                   </div>
-                  <button type="submit" className="button">Continuar</button>
+                  <button type="submit" className="button">
+                    Continuar
+                  </button>
                 </form>
               )}
               {step === 2 && (
                 <form onSubmit={handleSubmitSecondStep}>
                   <div className="input-group">
-                    <input type="email" name="email" placeholder="Correo electrónico" required />
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="Correo electrónico"
+                      required
+                    />
                   </div>
                   <div className="input-group">
-                    <input type="password" name="password" placeholder="Contraseña" required />
+                    <input
+                      type="password"
+                      name="password"
+                      placeholder="Contraseña"
+                      required
+                    />
                   </div>
                   <div className="input-group">
-                    <input type="password" name="confirmPassword" placeholder="Confirmar Contraseña" required />
+                    <input
+                      type="password"
+                      name="confirmPassword"
+                      placeholder="Confirmar Contraseña"
+                      required
+                    />
                   </div>
-                  <button type="submit" className="button">Registrarse</button>
+                  <button type="submit" className="button">
+                    Registrarse
+                  </button>
                 </form>
               )}
             </>
@@ -145,8 +186,10 @@ const SignUp = () => {
           <br></br>
           {!userCreated && (
             <div className="LogIn-text">
-              Already have an account? 
-              <a href="/" className="sign-up-link">Log In</a>
+              Already have an account?
+              <a href="/" className="sign-up-link">
+                Log In
+              </a>
             </div>
           )}
         </div>

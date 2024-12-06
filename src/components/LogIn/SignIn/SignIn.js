@@ -1,16 +1,33 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Importa useNavigate
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import ParticlesComponent from "../../ParticlesComponent";
-import { GoogleLogin } from "@react-oauth/google";
-import { signInWithEmailAndPassword } from "firebase/auth"; // Importa signInWithEmailAndPassword de Firebase
-import { auth } from "../../../services/firebase"; // Importa auth desde tu configuración de Firebase
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
+import { auth } from "../../../services/firebase";
+import { db } from "../../../services/firebase"; // Asegúrate de importar Firestore
+import { doc, getDoc, setDoc } from "firebase/firestore"; // Importa las funciones necesarias
 import "./SignIn.css";
 
 const SignIn = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); // Estado para manejar errores
-  const navigate = useNavigate(); // Crea una instancia de navigate
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log("Usuario ya autenticado:", user);
+        navigate("/Home");
+      }
+    });
+
+    return () => unsubscribe();
+  }, [navigate]);
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -23,16 +40,14 @@ const SignIn = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      // Autentica al usuario con Firebase usando email y contraseña
       const userCredential = await signInWithEmailAndPassword(
         auth,
         username,
         password,
       );
       const user = userCredential.user;
-      console.log("Usuario autenticado:", user);
-      // Redirige a la página de inicio tras el inicio de sesión exitoso
-      navigate("/home");
+      console.log("Usuario autenticado con email:", user);
+      navigate("/Home");
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
       setError(
@@ -41,68 +56,98 @@ const SignIn = () => {
     }
   };
 
-  const onSuccess = (credentialResponse) => {
-    const token = credentialResponse.credential;
-    console.log("Login exitoso, token:", token);
-    alert("Login correcto");
-    navigate("/home"); // Redirige a /home
-  };
+  const handleGoogleLogin = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      console.log("Usuario autenticado con Google:", user);
 
-  const onFailure = () => {
-    console.log("Login Fallido");
-    alert("Login fallido");
+      // Obtener información del usuario
+      const email = user.email;
+      const firstName = user.displayName
+        ? user.displayName.split(" ")[0]
+        : "Usuario";
+
+      // Comprobar si el usuario ya está registrado en Firestore
+      const userDocRef = doc(db, "users", email);
+      const userDoc = await getDoc(userDocRef);
+
+      if (!userDoc.exists()) {
+        // Si no existe, crear un nuevo documento
+        await setDoc(userDocRef, {
+          email: email,
+          firstName: firstName,
+          // Puedes agregar más campos si es necesario
+        });
+        console.log("Nuevo usuario registrado en Firestore:", {
+          email,
+          firstName,
+        });
+      } else {
+        console.log("Usuario ya registrado en Firestore:", userDoc.data());
+      }
+
+      navigate("/home");
+    } catch (error) {
+      console.error("Error en autenticación con Google:", error);
+      setError(
+        "No se pudo iniciar sesión con Google. Por favor, inténtalo de nuevo.",
+      );
+    }
   };
 
   return (
-    <div className="card-holder">
-      <ParticlesComponent id="tsparticles" />
-      <div className="card-container">
-        {/* Logo de la web */}
-        <img src="/searchlogonobg.png" alt="Logo" className="logo" />
+    <>
+      <div className="card-holder">
+        <ParticlesComponent id="tsparticles" />
+        <div className="card-container">
+          <img src="/searchlogonobg.png" alt="Logo" className="logo" />
 
-        <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <input
-              type="text"
-              value={username}
-              onChange={handleUsernameChange}
-              placeholder="Correo electrónico"
-              required
-            />
+          <form onSubmit={handleSubmit}>
+            <div className="input-group">
+              <input
+                type="text"
+                value={username}
+                onChange={handleUsernameChange}
+                placeholder="Correo electrónico"
+                required
+              />
+            </div>
+            <div className="input-group">
+              <input
+                type="password"
+                value={password}
+                onChange={handlePasswordChange}
+                placeholder="Contraseña"
+                required
+              />
+            </div>
+            {error && <p className="error-message">{error}</p>}
+            <button type="submit" className="button">
+              Iniciar sesión
+            </button>
+          </form>
+
+          <div className="separator">O</div>
+
+          {/* Botón de Google actualizado */}
+          <div className="google-button-container">
+            <button onClick={handleGoogleLogin} className="google-button">
+              <span className="google-logo"></span>
+              Iniciar sesión con Google
+            </button>
           </div>
-          <div className="input-group">
-            <input
-              type="password"
-              value={password}
-              onChange={handlePasswordChange}
-              placeholder="Contraseña"
-              required
-            />
+
+          <div className="SignUp-text">
+            ¿No tienes una cuenta?{" "}
+            <a href="/SignUp" className="sign-up-link">
+              Regístrate
+            </a>
           </div>
-          {error && <p className="error-message">{error}</p>} {""}
-          <button type="submit" className="button">
-            Iniciar sesión
-          </button>
-        </form>
-
-        <div className="separator">O</div>
-
-        <div className="google-button-container">
-          <GoogleLogin
-            text="Iniciar sesión con Google"
-            onSuccess={onSuccess}
-            onError={onFailure}
-          />
-        </div>
-
-        <div className="SignUp-text">
-          ¿No tienes una cuenta?{" "}
-          <a href="/SignUp" className="sign-up-link">
-            Regístrate
-          </a>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

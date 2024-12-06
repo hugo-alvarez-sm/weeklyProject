@@ -28,11 +28,11 @@ const ParticlesComponent = (props) => {
       interactivity: {
         events: {
           onClick: {
-            enable: true,
+            enable: false, // Cambiado a false
             mode: "repulse",
           },
           onHover: {
-            enable: true,
+            enable: true, // Cambiado a false
             mode: "grab",
           },
         },
