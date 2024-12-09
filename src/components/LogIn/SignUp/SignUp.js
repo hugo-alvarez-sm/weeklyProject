@@ -1,12 +1,12 @@
 // Importa React y useState para gestionar el estado del componente
 import React, { useState } from "react";
 // Importa los servicios de autenticación y Firestore desde el archivo de configuración de Firebase
-import { auth, db } from "../../../services/firebase"; 
+import { auth, db } from "../../../services/firebase";
 // Importa las funciones necesarias de Firebase para crear un usuario y guardar datos
-import { createUserWithEmailAndPassword } from "firebase/auth"; 
-import { doc, setDoc } from "firebase/firestore"; 
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 // Importa el hook de React Router para la navegación
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 // Importa el componente de partículas para la animación de fondo
 import ParticlesComponent from "../../ParticlesComponent";
 // Importa el archivo de estilos CSS para la página de registro
@@ -70,7 +70,7 @@ const SignUp = () => {
         const userCredential = await createUserWithEmailAndPassword(
           auth,
           formData.get("email"),
-          formData.get("password")
+          formData.get("password"),
         );
 
         const user = userCredential.user;
@@ -114,24 +114,25 @@ const SignUp = () => {
         React.createElement("div", {
           className: `progress-blob ${i > step ? "empty" : ""} ${
             i === step ? "half active" : ""
-          } ${i < step ? "full" : ""}`
+          } ${i < step ? "full" : ""}`,
         }),
         i < maxSteps &&
-          React.createElement("div", { className: "progress-line" })
+          React.createElement("div", { className: "progress-line" }),
       ),
     );
 
     return React.createElement(
       "div",
       { className: "progress-container" },
-      progressBlobs
+      progressBlobs,
     );
   };
 
   // Renderiza el contenido del componente
   return (
     <div className="sign-up-container">
-      <ParticlesComponent id="tsparticles" /> {/* Componente de fondo animado */}
+      <ParticlesComponent id="tsparticles" />{" "}
+      {/* Componente de fondo animado */}
       <div className="card-holder">
         <div className="card-container">
           {userCreated ? (

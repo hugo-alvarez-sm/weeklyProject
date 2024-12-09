@@ -23,18 +23,19 @@ import Home from "./components/Home/Home";
 import "./App.css";
 
 class App extends React.Component {
- 
   render() {
     // Carga el clientId desde las variables de entorno para configurar la autenticación de Google
-    const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+    const clientId =
+      "715631773424-u5ulkgg9miclor5t2hufcqccrgg4b4rd.apps.googleusercontent.com";
 
     // Verifica si el clientId no está definido y muestra un mensaje de error en la consola y en la interfaz si es el caso
     if (!clientId) {
-      console.error("Google Client ID is not defined. Please check your environment variables.");
+      console.error(
+        "Google Client ID is not defined. Please check your environment variables.",
+      );
       return <h1>Error: Missing configuration</h1>;
     }
 
- 
     return (
       // Proveedor de autenticación de Google con el clientId cargado desde las variables de entorno
       <GoogleOAuthProvider clientId={clientId}>

@@ -25,7 +25,7 @@ const Home = () => {
       // Cierra la sesión del usuario utilizando Firebase Authentication.
       await signOut(auth);
       // Redirige al usuario a la página de inicio de sesión tras cerrar sesión.
-      navigate("/"); 
+      navigate("/");
     } catch (error) {
       // Captura y muestra un mensaje de error si la desconexión falla.
       console.error("Error al cerrar sesión:", error); // Registra el error en la consola para depuración.
@@ -35,9 +35,14 @@ const Home = () => {
 
   // Renderiza el contenido del componente.
   return (
-    <div className="home-container"> {/* Contenedor principal con clase CSS para estilos. */}
-      <h1>Bienvenido a la página principal</h1> {/* Encabezado con un mensaje de bienvenida. */}
-      <button onClick={handleLogout} className="button"> {/* Botón que ejecuta la función de cierre de sesión. */}
+    <div className="home-container">
+      {" "}
+      {/* Contenedor principal con clase CSS para estilos. */}
+      <h1>Bienvenido a la página principal</h1>{" "}
+      {/* Encabezado con un mensaje de bienvenida. */}
+      <button onClick={handleLogout} className="button">
+        {" "}
+        {/* Botón que ejecuta la función de cierre de sesión. */}
         Cerrar sesión
       </button>
     </div>

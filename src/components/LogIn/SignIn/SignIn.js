@@ -68,13 +68,19 @@ const SignIn = () => {
     event.preventDefault(); // Previene el comportamiento por defecto de enviar el formulario.
     try {
       // Intenta iniciar sesión con correo y contraseña.
-      const userCredential = await signInWithEmailAndPassword(auth, username, password);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        username,
+        password,
+      );
       const user = userCredential.user;
       console.log("Usuario autenticado con email:", user);
       navigate("/Home"); // Redirige al home si la autenticación es exitosa.
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
-      setError("Correo o contraseña incorrectos. Por favor, inténtalo de nuevo.");
+      setError(
+        "Correo o contraseña incorrectos. Por favor, inténtalo de nuevo.",
+      );
     }
   };
 
@@ -91,7 +97,9 @@ const SignIn = () => {
 
       // Extrae información del usuario.
       const email = user.email;
-      const firstName = user.displayName ? user.displayName.split(" ")[0] : "Usuario";
+      const firstName = user.displayName
+        ? user.displayName.split(" ")[0]
+        : "Usuario";
 
       // Referencia al documento del usuario en Firestore.
       const userDocRef = doc(db, "users", email);
@@ -104,7 +112,10 @@ const SignIn = () => {
           firstName: firstName,
           // Agrega más campos según sea necesario.
         });
-        console.log("Nuevo usuario registrado en Firestore:", { email, firstName });
+        console.log("Nuevo usuario registrado en Firestore:", {
+          email,
+          firstName,
+        });
       } else {
         console.log("Usuario ya registrado en Firestore:", userDoc.data());
       }
@@ -112,18 +123,27 @@ const SignIn = () => {
       navigate("/home"); // Redirige al home después de iniciar sesión con Google.
     } catch (error) {
       console.error("Error en autenticación con Google:", error);
-      setError("No se pudo iniciar sesión con Google. Por favor, inténtalo de nuevo.");
+      setError(
+        "No se pudo iniciar sesión con Google. Por favor, inténtalo de nuevo.",
+      );
     }
   };
 
   return (
     <>
-      <div className="card-holder"> {/* Contenedor principal con clase CSS para estilos. */}
-        <ParticlesComponent id="tsparticles" /> {/* Componente de fondo animado. */}
-        <div className="card-container"> {/* Tarjeta de inicio de sesión con estilo. */}
-          <img src="/searchlogonobg.png" alt="Logo" className="logo" /> {/* Logo de la aplicación. */}
-
-          <form onSubmit={handleSubmit}> {/* Formulario de inicio de sesión. */}
+      <div className="card-holder">
+        {" "}
+        {/* Contenedor principal con clase CSS para estilos. */}
+        <ParticlesComponent id="tsparticles" />{" "}
+        {/* Componente de fondo animado. */}
+        <div className="card-container">
+          {" "}
+          {/* Tarjeta de inicio de sesión con estilo. */}
+          <img src="/searchlogonobg.png" alt="Logo" className="logo" />{" "}
+          {/* Logo de la aplicación. */}
+          <form onSubmit={handleSubmit}>
+            {" "}
+            {/* Formulario de inicio de sesión. */}
             <div className="input-group">
               <input
                 type="text"
@@ -142,21 +162,30 @@ const SignIn = () => {
                 required
               />
             </div>
-            {error && <p className="error-message">{error}</p>} {/* Muestra mensaje de error si existe. */}
-            <button type="submit" className="button">Iniciar sesión</button> {/* Botón de envío. */}
+            {error && <p className="error-message">{error}</p>}{" "}
+            {/* Muestra mensaje de error si existe. */}
+            <button type="submit" className="button">
+              Iniciar sesión
+            </button>{" "}
+            {/* Botón de envío. */}
           </form>
-
-          <div className="separator">O</div> {/* Separador de opciones de inicio de sesión. */}
-
-          <div className="google-button-container"> {/* Contenedor del botón de Google. */}
+          <div className="separator">O</div>{" "}
+          {/* Separador de opciones de inicio de sesión. */}
+          <div className="google-button-container">
+            {" "}
+            {/* Contenedor del botón de Google. */}
             <button onClick={handleGoogleLogin} className="google-button">
               <span className="google-logo"></span> {/* Icono de Google. */}
               Iniciar sesión con Google
             </button>
           </div>
-
-          <div className="SignUp-text"> {/* Enlace de registro para nuevos usuarios. */}
-            ¿No tienes una cuenta? <a href="/SignUp" className="sign-up-link">Regístrate</a>
+          <div className="SignUp-text">
+            {" "}
+            {/* Enlace de registro para nuevos usuarios. */}
+            ¿No tienes una cuenta?{" "}
+            <a href="/SignUp" className="sign-up-link">
+              Regístrate
+            </a>
           </div>
         </div>
       </div>
